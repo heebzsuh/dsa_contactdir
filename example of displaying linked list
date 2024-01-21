@@ -1,0 +1,8 @@
+list1.head=Node('monday')
+e2=Node('tue')
+e3=Node('wed')
+
+list1.head.next=e2
+e2.next=e3
+
+list1.listprint()
