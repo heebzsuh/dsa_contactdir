@@ -13,7 +13,7 @@ struct contact
 
 typedef struct contact *cont;
 
-cont head = NULL;
+cont start = NULL;
 int elts = 0;
 
 cont new()
@@ -26,15 +26,15 @@ cont new()
         exit(1);
     }
     printf("Enter Name:\n");
-    scanf("%s", newcont->name);
+    scanf("%s", &newcont->name);
     printf("Enter Phone Number:\n");
-    scanf("%ld", newcont->phone);
+    scanf("%ld", &newcont->phone);
     printf("Enter city:\n");
-    scanf("%s", newcont->city);
+    scanf("%s", &newcont->city);
     printf("Enter email:\n");
-    scanf("%s", newcont->email);
+    scanf("%s", &newcont->email);
     printf("Enter birthday(DD/MM/YYYY):\n");
-    scanf("%s", newcont->birthday);
+    scanf("%s", &newcont->birthday);
 
     newcont->next = NULL;
     elts++;
@@ -43,36 +43,72 @@ cont new()
 
 void fulldisplay()
 {
-    char req; // user input ofname required
-    cont cur = head;
+    // user input ofname required
+    cont cur = start;
     int num = 1;
-    if (head == NULL)
+    if (start == NULL)
     {
         printf("No contacts saved.");
         exit(0);
     }
     while (cur->next != NULL)
     {
-        printf("|%d|Name: %s\nPhone: %s\nCity: %ld\nEmail: %s\nBirthday: %s\n", num, cur->name, cur->phone, cur->city, cur->email, cur->birthday);
+        printf("|%d|Name: %s\nPhone: %s\nCity: %ld\nEmail: %s\nBirthday: %s\n", num, *cur->name, cur->phone, *cur->city, *cur->email, *cur->birthday);
         cur = cur->next;
         num++;
     }
-    printf("Total number of contacts saved=%d", (num - 1));
+    printf("Total number of contacts saved=%d\n", (num - 1));
 }
 
-void display(int elt)
+void display(char nm)
 {
-    char req; // user input of name required
-    cont cur = head;
+
+    cont cur = start;
     int num = 1;
-    printf("Enter Name of person=/n");
-    scanf("%s", req);
-    while (cur->name != req)
+    printf("Enter name of required contact= "); // user input of name required
+    scanf("%s", &nm);
+    while (cur->name != nm)
     {
         cur = cur->next;
         num++;
     }
-    printf("Name: %s\nPhone: %s\nCity: %ld\nEmail: %s\nBirthday: %s\n", cur->name, cur->phone, cur->city, cur->email, cur->birthday);
+    printf("Name: %s\nPhone: %s\nCity: %ld\nEmail: %s\nBirthday: %s\n", *cur->name, cur->phone, *cur->city, *cur->email, *cur->birthday);
 }
 
-// cont new()
+int main()
+{
+
+    int i, n, ch;
+    char nm;
+    while (1)
+    {
+        printf("-----MENU-----");
+
+        printf("\n1. Create contact");
+        printf("\n2. Display all contacts");
+        printf("\n3. Display entered name's contact");
+
+        printf("\nEnter choice= ");
+        scanf("%d", &ch);
+
+        switch (ch)
+        {
+        case 1:
+            printf("enter no of contacts= ");
+            scanf("%d", &n);
+            for (i = 0; i < n; i++)
+            {
+                start = new ();
+            }
+            break;
+        case 2:
+            fulldisplay();
+            break;
+        case 3:
+
+            display(nm);
+        default:
+            return 1;
+        }
+    }
+}
