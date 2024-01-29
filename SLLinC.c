@@ -75,9 +75,9 @@ void fulldisplay()
     printf("Total number of contacts saved=%d\n", (num - 1));
 }
 
-void display(char nm)
+void display(char[] nm)
 {
-
+printf("%s",nm);
     cont cur = start;
     int num = 1;
     printf("Enter name of required contact= "); // user input of name required
