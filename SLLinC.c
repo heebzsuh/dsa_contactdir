@@ -41,15 +41,18 @@ cont new()
     return newcont;
 }
 
-cont insert_back(cont temp){
-    cont temp;
+cont insert_end(){
+    cont cur,temp;
     temp=new();
     if(start==NULL)
     {return temp;}
-     temp->next=start;
-    return temp;
-}
-
+    cur=start;
+    while(cur->next!=NULL){
+        cur=cur->next;
+    }
+        cur->next=temp;
+        return start;
+ 
 
 
 
@@ -110,8 +113,8 @@ int main()
             scanf("%d", &n);
             for (i = 0; i < n; i++)
             {
-                start = new ();
-                insert_back(start);
+               
+                insert_end();
             }
             break;
         case 2:
