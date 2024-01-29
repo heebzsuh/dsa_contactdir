@@ -41,6 +41,18 @@ cont new()
     return newcont;
 }
 
+cont insert_back(){
+    cont temp;
+    temp=new();
+    if(start==NULL)
+    {return temp;}
+     temp->next=start;
+    return temp;
+}
+
+
+
+
 void fulldisplay()
 {
     // user input ofname required
