@@ -41,7 +41,7 @@ cont new()
     return newcont;
 }
 
-cont insert_back(){
+cont insert_back(cont temp){
     cont temp;
     temp=new();
     if(start==NULL)
