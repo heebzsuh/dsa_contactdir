@@ -111,6 +111,7 @@ int main()
             for (i = 0; i < n; i++)
             {
                 start = new ();
+                insert_back(start);
             }
             break;
         case 2:
