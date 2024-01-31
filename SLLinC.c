@@ -41,6 +41,21 @@ cont new()
     return newcont;
 }
 
+cont insert_end(){
+    cont cur,temp;
+    temp=new();
+    if(start==NULL)
+    {return temp;}
+    cur=start;
+    while(cur->next!=NULL){
+        cur=cur->next;
+    }
+        cur->next=temp;
+        return start;
+ 
+
+
+
 void fulldisplay()
 {
     // user input ofname required
@@ -60,9 +75,9 @@ void fulldisplay()
     printf("Total number of contacts saved=%d\n", (num - 1));
 }
 
-void display(char nm)
+void display(char[] nm)
 {
-
+printf("%s",nm);
     cont cur = start;
     int num = 1;
     printf("Enter name of required contact= "); // user input of name required
@@ -98,7 +113,8 @@ int main()
             scanf("%d", &n);
             for (i = 0; i < n; i++)
             {
-                start = new ();
+               
+                insert_end();
             }
             break;
         case 2:
