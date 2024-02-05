@@ -1,4 +1,4 @@
-elts=0
+
 class Node:
     class Data:
        def __init__(self,name,pno,city,email,bday):
@@ -33,13 +33,7 @@ class LinkedList:
             print(curr.data)
             curr=curr.next
         #LL+=str(curr.data)
-        return LL
-    
-    ''' def listprint(self):
-        printval=self.head   #head is of data type node
-        while printval is not None:
-            print(printval.data)
-            printval=printval.next'''
+        return LL 
 
     def insertEnd(self,data):
         new_node=Node(data)
@@ -84,10 +78,10 @@ class LinkedList:
 
         prev = None
         current_node = self.head
-        while (current_node and current_node.data.name)!=name:
-            prev = current_node
-            current_node = current_node.next
+        while (current_node and current_node.data.name)!=name: #basically loses the contact
 
+            prev = current_node       #prev becomes current
+            current_node = current_node.next   #current becomes next
         if current_node is None:
             print("Contact", name, "not found.")
             return
