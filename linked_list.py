@@ -1,20 +1,24 @@
 
 class Node:
     class Data:
-       def __init__(self,usn,name,bday,pno):
-        self.usn=usn
+       def __init__(self,name,pno,city,email,bday):
+        
         self.name=name
-        self.bday=bday
         self.pno=pno
+        self.city=city
+        self.email=email
+        self.bday=bday
+        self.next=None
+        
     
        def __str__(self):
           dt=""
-          while self.usn is not None:
-            dt+=str(self.usn)+" "+str(self.name)+" "+str(self.bday)+" "+str(self.pno)
+          while self.name is not None:
+            dt+=str(self.name)+" "+str(self.pno)+" "+str(self.city)+" "+str(self.email)+" "+str(self.bday) #format with 3 tabspaces
             return dt
           
     def __init__(self,data):
-        self.data=self.Data(data.usn,data.name,data.bday,data.pno)
+        self.data=self.Data(data.name,data.pno,data.city,data.email,data.bday)
         self.next=None
        
        
@@ -29,13 +33,7 @@ class LinkedList:
             print(curr.data)
             curr=curr.next
         #LL+=str(curr.data)
-        return LL
-    
-    ''' def listprint(self):
-        printval=self.head   #head is of data type node
-        while printval is not None:
-            print(printval.data)
-            printval=printval.next'''
+        return LL 
 
     def insertEnd(self,data):
         new_node=Node(data)
@@ -44,47 +42,113 @@ class LinkedList:
         current_node=self.head
         while(current_node.next):
             current_node=current_node.next
-        current_node=current_node.next
+        current_node.next=new_node
+        new_node.next=None
 
-print("================================================\n")
-print("                 CONTACT DIRECTORY               \n")
-print("================================================\n")
-print("CHOICES:")
-print('''
-      1. Display directory
-      2. Enter new contact and details
-      3. Delete existing contact
-      4. Display chosen contact
-      5. Exit''')
-print("================================================\n")
+    def searchcont(self,nm):   #traverse from front end
+        if self.head is None:
+            print("Contact directory is empty.")
+            
+        current_node=self.head
+        if self.head==None:
+            print("Directory empty")
+        else:
+            if current_node.data.name==nm:
+                print("Contact found:")
+                print("Name:", current_node.data.name)
+                print("Phone Number:", current_node.data.pno)
+                print("City:", current_node.data.city)
+                print("Email:", current_node.data.email)
+                print("Bday:", current_node.data.bday)
+                return "" 
+            else:
+                print("Contact not found.")
+                return ""
+        
 
-l1=LinkedList()
+    def delete_contact(self, name):
+        if self.head is None:
+            print("Contact list is empty.")
+            return
 
-l1.head=Node(Node.Data('084','monday','4505853','sfivhj'))
-e2=Node(Node.Data('098','rid','25102004','mushroom'))
-e3=Node(Node.Data('43','gsfuissv','srg','w68394'))
+        if self.head.data.name == name:
+            self.head = self.head.next
+            print("Contact", name, "deleted successfully.")
+            return
 
-#l1.head.next=e2
-#e2.next=e3
+        prev = None
+        current_node = self.head
+        while (current_node and current_node.data.name)!=name: #basically loses the contact
+
+            prev = current_node       #prev becomes current
+            current_node = current_node.next   #current becomes next
+        if current_node is None:
+            print("Contact", name, "not found.")
+            return
+
+        prev.next = current_node.next
+        print("Contact", name, "deleted successfully.")
+
+    def display_contacts(self):
+        current_contact = self.head
+        while current_contact is not None:
+            print("Name:", current_contact.data.name)
+            print("Phone Number:", current_contact.data.pno)
+            print("City:", current_contact.data.city)
+            print("Email:", current_contact.data.email)
+            print("Bday:", current_contact.data.bday)
+            print("--------------------")
+            current_contact = current_contact.next
+
+#list1=[]
+l1=LinkedList()       
 
 while True:
-    ch=int(input("Enter choice= "))
-    if ch not in range(1,5):
-        print("Unacceptable input")
-    else:
-        if ch==1:
-            print(l1)
-        elif ch==2:
-            break
 
+    print("================================================\n")
+    print("                 CONTACT DIRECTORY               \n")
+    print("================================================\n")
+    print("CHOICES:")
+    print('''
+        1. Enter new contact and details
+        2. Delete existing contact
+        3. Search for contact
+        4. Display directory
+        5. Exit''')
+    print("================================================\n")  #3 tabspaces btwn each data field
 
+    
+    '''
+    l1.head=Node(Node.Data('084','monday','4505853','sfivhj'))
+    e2=Node(Node.Data('098','rid','25102004','mushroom'))
+    e3=Node(Node.Data('43','gsfuissv','srg','w68394'))'''
 
-
-
-
-
-
-
+    ch=int(input("Enter choice="))
+    if ch not in range(1,6):
+        print("Invalid choice, enter again")
+        continue
+     #returns to next execn of while loop
+    if ch==1:    #name,pno,city,email,bday
+        dn=str(input("Enter name= "))
+        dpno=int(input("enter phoneno="))
+        dcity=str(input("enter city="))
+        dmail=str(input("enter email="))
+        dbday=str(input("enter birthday="))
+        l1.insertEnd(Node.Data(dn,dpno,dcity,dmail,dbday))
+        #list1.append(Node.Data(dn,dpno,dcity,dmail,dbday))
+        continue
+    elif ch==2:
+        nm=str(input("enter name of contact to delete="))
+        l1.delete_contact(nm)
+    elif ch==3:
+        nm1=str(input("Enter contact to find="))
+        l1.searchcont(nm1)
+        continue
+    elif ch==4:
+        l1.display_contacts()
+    elif ch==5:
+        print("BAI")
+        break
 
 
 
