@@ -1,0 +1,1 @@
+ command=self.insert_button
